@@ -16,6 +16,7 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "dependencies": {
+    "jwt-decode": "^3.1.2",
     "leaflet": "^1.7.1",
     "leaflet.locatecontrol": "^0.76.0"
   },

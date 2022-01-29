@@ -88,11 +88,7 @@
 			{#if query && results.length > 0}
 				<!-- Si hay consulta con resultados, mostrarlos en la selección -->
 				{#each results as { name, latLng: [lat, lng] }, i}
-					<div
-						class="selection-element"
-						class:selected={i === offset}
-						on:click={() => showItem(i, [lat, lng])}
-					>
+					<div class="selection-element" class:selected={i === offset} on:click={() => showItem(i, [lat, lng])}>
 						<div>{name}</div>
 						{#if currentLocation}
 							<div>{distanceH(currentLocation, [lat, lng])}</div>

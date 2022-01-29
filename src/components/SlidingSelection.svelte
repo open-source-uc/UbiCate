@@ -11,9 +11,7 @@
 
 	onMount(() => {
 		if (browser) {
-			const carouselGap = parseFloat(
-				window.getComputedStyle(carousel, null).getPropertyValue('gap')
-			);
+			const carouselGap = parseFloat(window.getComputedStyle(carousel, null).getPropertyValue('gap'));
 			const firstChild = carousel.firstElementChild;
 
 			if (firstChild) itemWidth = firstChild.clientWidth + carouselGap;

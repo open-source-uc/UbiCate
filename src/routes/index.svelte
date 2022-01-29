@@ -20,6 +20,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Option from '$components/Option.svelte';
+	import CenteredCard from '$components/CenteredCard.svelte';
+	import CenteredCardContainer from '$components/CenteredCardContainer.svelte';
 	const options: OptionType[] = [
 		{
 			label: 'Ubicación',
@@ -35,12 +37,9 @@
 	const optionsReady: boolean[] = Array(options.length).fill(false);
 </script>
 
-<div class="card-container">
-	<object
-		data="assets/logo.svg"
-		aria-label="Icono de busqueda con una capa de graduación en vez de un circulo"
-	/>
-	<div class="card">
+<CenteredCardContainer>
+	<img src="assets/logo.svg" alt="Icono de busqueda con una capa de graduación en vez de un circulo" />
+	<CenteredCard>
 		<h1 class="title">Hola 👋</h1>
 		<p class="info">Antes de usar la aplicación, se necesita que otorgues algunso permisos</p>
 		<div id="options">
@@ -48,34 +47,13 @@
 				<Option bind:ready={optionsReady[i]} {label} {handleClick} {onClientMount} />
 			{/each}
 		</div>
-		<button
-			disabled={!optionsReady.every(Boolean)}
-			on:click={() => optionsReady.every(Boolean) && goto('map')}>Aceptar</button
+		<button disabled={!optionsReady.every(Boolean)} on:click={() => optionsReady.every(Boolean) && goto('map')}
+			>Aceptar</button
 		>
-	</div>
-</div>
+	</CenteredCard>
+</CenteredCardContainer>
 
 <style>
-	.card-container {
-		width: 100vw;
-		height: 100vh;
-		padding: 20px 10px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		align-items: center;
-		justify-content: center;
-	}
-	.card {
-		background: var(--dark-3);
-		padding: var(--padding-4);
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		text-align: center;
-		width: fit-content;
-		max-width: 400px;
-	}
 	.info {
 		padding: 0 10px;
 	}

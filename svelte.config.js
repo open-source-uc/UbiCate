@@ -3,6 +3,7 @@ import adapterAuto from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 import dotenv from "dotenv";
 import path from 'path';
+import { readFileSync } from 'fs';
 
 dotenv.config()
 
@@ -21,6 +22,10 @@ const config = {
 			base: staticMode ? basePath : '',
 		},
 		vite: {
+			envPrefix: "PUBLIC_",
+			define: {
+				pkg: JSON.parse(readFileSync(new URL('package.json', import.meta.url), 'utf8'))
+			},
 			resolve: {
 				alias: {
 					$components: path.resolve('./src/components'),
