@@ -32,7 +32,7 @@ jobs:
           touch ./build/.nojekyll
 
       - name: Upload build directory
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
           folder: build
