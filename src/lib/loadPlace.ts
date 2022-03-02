@@ -3,10 +3,16 @@
 // > except that it runs on both the server and the client.
 import type { Load } from '@sveltejs/kit';
 import type { Place } from '$lib/types';
+import { prerendering } from '$app/env';
 
-export const loadPlace: Load = async ({ fetch, url: { searchParams } }) => {
-	const placeId = searchParams.get('id');
-	if (!placeId) return { redirect: '../', status: 422, error: new Error('missing place id') };
+export const loadPlace: Load = async ({ fetch, url }) => {
+	let placeId;
+	if (!prerendering) {
+		const { searchParams } = url;
+		placeId = searchParams.get('id');
+	}
+
+	if (!placeId) return { redirect: '../', status: 303 };
 
 	const response = await fetch(`${import.meta.env.PUBLIC_API}/places/${placeId}`);
 	const { status, statusText, ok } = response;
