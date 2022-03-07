@@ -5,13 +5,15 @@ import type { Load } from '@sveltejs/kit';
 import type { Place } from '$lib/types';
 import { userSession } from './userStore';
 import { get } from 'svelte/store';
-import { browser } from '$app/env';
+import { prerendering } from '$app/env';
 
-export const loadPlace: Load = async ({ fetch, url: { searchParams } }) => {
-	const placeId = searchParams.get('id');
+export const loadPlace: Load = async ({ fetch, url }) => {
+	if (prerendering) return { status: 301, redirect: '/map' };
+
+	const placeId = url.searchParams.get('id');
 	if (!placeId) return { status: 422, error: new Error('missing place id') };
 
-	if (!get(userSession) && browser) {
+	if (!get(userSession)) {
 		return { status: 301, redirect: '/map' };
 	}
 	const response = await fetch(`${import.meta.env.PUBLIC_API}/places/${placeId}`);
