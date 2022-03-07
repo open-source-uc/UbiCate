@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<base href={basePath} />
+	<base href={basePath || '/'} />
 </svelte:head>
 
 <slot />

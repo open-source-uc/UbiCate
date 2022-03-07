@@ -18,7 +18,7 @@ const config = {
 	kit: {
 		adapter: staticMode ? adapterStatic() : adapterAuto(),
 		target: 'body',
-		trailingSlash: 'never',
+		trailingSlash: "always",
 		paths: {
 			base: staticMode ? basePath : '',
 		},
