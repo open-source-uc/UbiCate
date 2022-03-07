@@ -1,0 +1,41 @@
+name: Deploy a static page in GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      BASE_PATH: /${{ github.event.repository.name }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline
+
+      - run: echo "$BASE_PATH"
+
+      - name: Build site
+        run: yarn build:static
+
+      - name: Add additional files
+        run: |
+          touch ./build/.nojekyll
+
+      - name: Upload build directory
+        uses: JamesIves/github-pages-deploy-action@4.2.2
+        with:
+          branch: gh-pages
+          folder: build
+          commit-message: Deploy 🚀
+          clean: true
+          single-commit: true
