@@ -16,6 +16,9 @@ const config = {
 	// https://github.com/sveltejs/svelte-preprocess
 	preprocess: preprocess(),
 	kit: {
+		prerender: {
+			default: true
+		},
 		adapter: staticMode ? adapterStatic() : adapterAuto(),
 		paths: {
 			base: staticMode ? basePath : '',
