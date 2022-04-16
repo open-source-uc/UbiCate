@@ -1,0 +1,1 @@
+import{S as n,i as o,s as c}from"../../chunks/index-3df697d8.js";import{l as i}from"../../chunks/loadPlace-161dbb03.js";const f=i;function r(t,e,s){let{place:a}=e;return t.$$set=l=>{"place"in l&&s(0,a=l.place)},[a]}class d extends n{constructor(e){super(),o(this,e,r,null,c,{place:0})}}export{d as default,f as load};
