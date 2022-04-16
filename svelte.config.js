@@ -17,7 +17,6 @@ const config = {
 	preprocess: preprocess(),
 	kit: {
 		adapter: staticMode ? adapterStatic() : adapterAuto(),
-		target: 'body',
 		paths: {
 			base: staticMode ? basePath : '',
 		},
